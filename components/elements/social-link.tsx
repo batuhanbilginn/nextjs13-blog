@@ -39,7 +39,7 @@ const SocialLink = ({
       <div
         className={`${
           isShareURL
-            ? "py-2 px-3 bg-neutral-200 rounded-md text-neutral-600 hover:bg-neutral-600 hover:text-neutral-100 duration-100 ease-in-out transition-colors"
+            ? "py-2 px-3 w-full bg-neutral-200 rounded-md text-neutral-600 hover:bg-neutral-600 hover:text-neutral-100 duration-100 ease-in-out transition-colors"
             : ""
         }`}
       >
