@@ -27,9 +27,13 @@ const PostContent = ({ post }: PostContentProps) => {
         <div>{getRelativeDate(post.date_created)}</div>
       </div>
       {/* Title */}
-      <h2 className="text-3xl font-medium">{post.title}</h2>
+      <h2 className="@lg:text-3xl text-xl @md:text-2xl font-medium">
+        {post.title}
+      </h2>
       {/* Description */}
-      <p className="leading-snug text-neutral-600">{post.description}</p>
+      <p className="text-base @lg:text-lg leading-snug text-neutral-600">
+        {post.description}
+      </p>
       {/* Read More */}
       <div className="flex items-center gap-2 pt-3">
         Read More <ArrowRight size="14" />

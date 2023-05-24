@@ -7,7 +7,7 @@ interface PostListProps {
 }
 const PostList = ({ posts, layout = "vertical" }: PostListProps) => {
   return (
-    <div className="grid grid-cols-2 gap-10">
+    <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
       {posts.map((post) => (
         <PostCard layout={layout} post={post} key={post.id} />
       ))}
