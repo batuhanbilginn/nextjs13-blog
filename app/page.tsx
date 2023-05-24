@@ -1,7 +1,9 @@
+import PaddingContainer from "@/components/layout/padding-container";
+
 export default function Home() {
   return (
-    <main className="h-auto">
-      <h1>Home</h1>
-    </main>
+    <PaddingContainer>
+      <main className="h-auto space-y-10"></main>
+    </PaddingContainer>
   );
 }
