@@ -1,4 +1,6 @@
 import { DUMMY_POSTS } from "@/DUMMY_DATA";
+import PaddingContainer from "@/components/layout/padding-container";
+import PostHero from "@/components/post/post-hero";
 import { notFound } from "next/navigation";
 
 export const generateStaticParams = async () => {
@@ -22,7 +24,11 @@ const Page = ({
     notFound();
   }
 
-  return <div>{post?.title}</div>;
+  return (
+    <PaddingContainer>
+      <PostHero post={post} />
+    </PaddingContainer>
+  );
 };
 
 export default Page;
