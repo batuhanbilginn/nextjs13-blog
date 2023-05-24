@@ -34,23 +34,17 @@ const Page = ({
             <SocialLink
               isShareURL
               platform="facebook"
-              link={`https://www.facebook.com/sharer/sharer.php?u=${
-                "http://localhost:3000" + `/post/${post.slug}`
-              }`}
+              link={`https://www.facebook.com/sharer/sharer.php?u=${`${process.env.NEXT_PUBLIC_SITE_URL}/post/${post.slug}`}`}
             />
             <SocialLink
               isShareURL
               platform="twitter"
-              link={`https://twitter.com/intent/tweet?url=${
-                "http://localhost:3000" + `/post/${post.slug}`
-              }`}
+              link={`https://twitter.com/intent/tweet?url=${`${process.env.NEXT_PUBLIC_SITE_URL}/post/${post.slug}`}`}
             />
             <SocialLink
               isShareURL
               platform="linkedin"
-              link={`https://www.linkedin.com/shareArticle?mini=true&url=${
-                "http://localhost:3000" + `/post/${post.slug}`
-              }`}
+              link={`https://www.linkedin.com/shareArticle?mini=true&url=${`${process.env.NEXT_PUBLIC_SITE_URL}/post/${post.slug}`}`}
             />
           </div>
         </div>
