@@ -1,5 +1,5 @@
+import Navigation from "@/components/navigation/navigation";
 import { Inter } from "next/font/google";
-import Link from "next/link";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -17,19 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="flex items-center justify-between px-4 py-6 border-b">
-          <Link className="font-bold" href="/about">
-            Logo
-          </Link>
-          <ul className="flex items-center gap-3">
-            <li>
-              <Link href="/about">About</Link>
-            </li>
-            <li>
-              <Link href="/about/company">Company</Link>
-            </li>
-          </ul>
-        </div>
+        <Navigation />
         {children}
       </body>
     </html>
