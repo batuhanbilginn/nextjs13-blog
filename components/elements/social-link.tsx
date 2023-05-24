@@ -8,7 +8,15 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-const SocialLink = ({ platform, link }: { platform: string; link: string }) => {
+const SocialLink = ({
+  platform,
+  link,
+  isShareURL = false,
+}: {
+  platform: string;
+  link: string;
+  isShareURL?: boolean;
+}) => {
   const getIcon = (platform: string) => {
     switch (platform) {
       case "facebook":
@@ -26,7 +34,19 @@ const SocialLink = ({ platform, link }: { platform: string; link: string }) => {
     }
   };
 
-  return <Link href={link}>{getIcon(platform)}</Link>;
+  return (
+    <Link href={link}>
+      <div
+        className={`${
+          isShareURL
+            ? "py-2 px-3 bg-neutral-200 rounded-md text-neutral-600 hover:bg-neutral-600 hover:text-neutral-100 duration-100 ease-in-out transition-colors"
+            : ""
+        }`}
+      >
+        {getIcon(platform)}
+      </div>
+    </Link>
+  );
 };
 
 export default SocialLink;
