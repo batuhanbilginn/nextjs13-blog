@@ -27,6 +27,12 @@ const Page = ({
   return (
     <PaddingContainer>
       <PostHero post={post} />
+      <div className="flex gap-10 mt-10">
+        <div className="relative">
+          <div className="sticky top-20">Share</div>
+        </div>
+        <div className="h-[1200px] bg-slate-200 w-full">Post Body</div>
+      </div>
     </PaddingContainer>
   );
 };
