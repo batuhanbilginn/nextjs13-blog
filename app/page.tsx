@@ -1,3 +1,4 @@
+import CTACard from "@/components/elements/cta-card";
 import PaddingContainer from "@/components/layout/padding-container";
 import PostCard from "@/components/post/post-card";
 import PostList from "@/components/post/post-lists";
@@ -11,6 +12,7 @@ export default function Home() {
         <PostList
           posts={DUMMY_POSTS.filter((_post, index) => index > 0 && index < 3)}
         />
+        <CTACard />
         <PostCard reverse post={DUMMY_POSTS[3]} />
         <PostList
           posts={DUMMY_POSTS.filter((_post, index) => index > 3 && index < 6)}
