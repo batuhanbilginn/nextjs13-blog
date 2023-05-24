@@ -5,12 +5,17 @@ import PostContent from "./post-content";
 
 interface PostProps {
   post: Post;
+  layout?: "vertical" | "horizontal";
 }
 
-const PostCard = ({ post }: PostProps) => {
+const PostCard = ({ post, layout = "horizontal" }: PostProps) => {
   return (
     <Link
-      className="grid items-center grid-cols-2 gap-10"
+      className={` ${
+        layout === "horizontal"
+          ? "grid items-center grid-cols-2 gap-10"
+          : "space-y-10"
+      } `}
       href={`/post/${post.slug}`}
     >
       {/* Post Image */}
