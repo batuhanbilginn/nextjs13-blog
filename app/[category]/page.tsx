@@ -1,4 +1,3 @@
-import { DUMMY_CATEGORIES } from "@/DUMMY_DATA";
 import PaddingContainer from "@/components/layout/padding-container";
 import PostList from "@/components/post/post-lists";
 import directus from "@/lib/directus";
@@ -6,11 +5,34 @@ import { Post } from "@/types/collection";
 import { notFound } from "next/navigation";
 
 export const generateStaticParams = async () => {
-  return DUMMY_CATEGORIES.map((category) => {
+  // This for DUMMY DATA
+  /* return DUMMY_CATEGORIES.map((category) => {
     return {
       category: category.slug,
     };
-  });
+  }); */
+
+  try {
+    const categories = await directus.items("category").readByQuery({
+      filter: {
+        status: {
+          _eq: "published",
+        },
+      },
+      fields: ["slug"],
+    });
+
+    const params = categories?.data?.map((category) => {
+      return {
+        category: category.slug as string,
+      };
+    });
+
+    return params || [];
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error fetching categories");
+  }
 };
 
 const Page = async ({
@@ -20,6 +42,7 @@ const Page = async ({
     category: string;
   };
 }) => {
+  // This is for DUMMY
   /* const category = DUMMY_CATEGORIES.find(
     (category) => category.slug === params.category
   );
