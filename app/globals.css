@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .rich-text h2 {
+    @apply mb-3 text-3xl font-semibold text-neutral-900;
+  }
+
+  .rich-text h3 {
+    @apply mb-3 text-2xl font-semibold text-neutral-900;
+  }
+
+  .rich-text p {
+    @apply mb-3 leading-snug text-neutral-700;
+  }
+}

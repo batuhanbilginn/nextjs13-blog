@@ -5,7 +5,7 @@ const PostBody = ({ body }: { body: string }) => {
     return parse(body);
   };
 
-  return <div>{getParsedHTML(body)}</div>;
+  return <div className="rich-text">{getParsedHTML(body)}</div>;
 };
 
 export default PostBody;
