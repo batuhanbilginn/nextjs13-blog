@@ -4,14 +4,36 @@ import SocialLink from "@/components/elements/social-link";
 import PaddingContainer from "@/components/layout/padding-container";
 import PostBody from "@/components/post/post-body";
 import PostHero from "@/components/post/post-hero";
+import directus from "@/lib/directus";
 import { notFound } from "next/navigation";
 
 export const generateStaticParams = async () => {
-  return DUMMY_POSTS.map((post) => {
+  /* return DUMMY_POSTS.map((post) => {
     return {
       slug: post.slug,
     };
-  });
+  }); */
+  try {
+    const posts = await directus.items("post").readByQuery({
+      filter: {
+        status: {
+          _eq: "published",
+        },
+      },
+      fields: ["slug"],
+    });
+
+    const params = posts?.data?.map((post) => {
+      return {
+        slug: post.slug as string,
+      };
+    });
+
+    return params || [];
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error fetching posts");
+  }
 };
 
 const Page = ({
