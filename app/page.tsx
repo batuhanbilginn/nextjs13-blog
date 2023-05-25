@@ -28,8 +28,6 @@ export default async function Home() {
 
   const posts = await getAllPosts();
 
-  console.log(posts);
-
   if (!posts) {
     notFound();
   }
