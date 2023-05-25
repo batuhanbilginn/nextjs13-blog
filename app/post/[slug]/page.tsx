@@ -1,4 +1,3 @@
-import { DUMMY_POSTS } from "@/DUMMY_DATA";
 import CTACard from "@/components/elements/cta-card";
 import SocialLink from "@/components/elements/social-link";
 import PaddingContainer from "@/components/layout/padding-container";
@@ -36,14 +35,41 @@ export const generateStaticParams = async () => {
   }
 };
 
-const Page = ({
+const Page = async ({
   params,
 }: {
   params: {
     slug: string;
   };
 }) => {
-  const post = DUMMY_POSTS.find((post) => post.slug === params.slug);
+  /*   const post = DUMMY_POSTS.find((post) => post.slug === params.slug); */
+
+  const getPostData = async () => {
+    try {
+      const post = await directus.items("post").readByQuery({
+        filter: {
+          slug: {
+            _eq: params.slug,
+          },
+        },
+        fields: [
+          "*",
+          "category.id",
+          "category.title",
+          "auhtor.id",
+          "author.first_name",
+          "author.last_name",
+        ],
+      });
+
+      return post?.data?.[0];
+    } catch (error) {
+      console.log(error);
+      throw new Error("Error fetching post");
+    }
+  };
+
+  const post = await getPostData();
 
   if (!post) {
     notFound();
