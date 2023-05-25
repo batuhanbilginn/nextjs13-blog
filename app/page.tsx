@@ -13,7 +13,7 @@ export default async function Home() {
           "*",
           "author.id",
           "author.first_name",
-          "auhtor.last_name",
+          "author.last_name",
           "category.id",
           "category.title",
         ],
