@@ -25,10 +25,21 @@ export const generateStaticParams = async () => {
     const params = posts?.data?.map((post) => {
       return {
         slug: post.slug as string,
+        lang: "en",
       };
     });
 
-    return params || [];
+    const localisedParams = posts?.data?.map((post) => {
+      return {
+        slug: post.slug as string,
+        lang: "de",
+      };
+    });
+
+    // Concat Localised and Regular Params
+    const allParams = params?.concat(localisedParams ?? []);
+
+    return allParams || [];
   } catch (error) {
     console.log(error);
     throw new Error("Error fetching posts");
@@ -62,10 +73,29 @@ const Page = async ({
           "auhtor.id",
           "author.first_name",
           "author.last_name",
+          "translations.*",
+          "category.translations.*",
         ],
       });
 
-      return post?.data?.[0];
+      const postData = post?.data?.[0];
+
+      if (locale === "en") {
+        return postData;
+      } else {
+        const localisedPostData = {
+          ...postData,
+          title: postData?.translations?.[0]?.title,
+          description: postData?.translations?.[0]?.description,
+          body: postData?.translations?.[0]?.body,
+          category: {
+            ...postData?.category,
+            title: postData?.category?.translations?.[0]?.title,
+          },
+        };
+
+        return localisedPostData;
+      }
     } catch (error) {
       console.log(error);
       throw new Error("Error fetching post");
