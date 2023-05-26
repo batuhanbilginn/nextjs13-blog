@@ -38,17 +38,21 @@ export default async function Home({
     notFound();
   }
 
+  const locale = params.lang;
+
   return (
     <PaddingContainer>
       <main className="space-y-10">
-        <PostCard post={posts[0]} />
+        <PostCard locale={locale} post={posts[0]} />
         <PostList
+          locale={locale}
           posts={posts.filter((_post, index) => index > 0 && index < 3)}
         />
         {/* @ts-expect-error Async Server Component */}
-        <CTACard />
-        <PostCard reverse post={posts[3]} />
+        <CTACard locale={locale} />
+        <PostCard locale={locale} reverse post={posts[3]} />
         <PostList
+          locale={locale}
           posts={posts.filter((_post, index) => index > 3 && index < 6)}
         />
       </main>

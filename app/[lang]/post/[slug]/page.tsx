@@ -40,9 +40,12 @@ const Page = async ({
 }: {
   params: {
     slug: string;
+    lang: string;
   };
 }) => {
   /*   const post = DUMMY_POSTS.find((post) => post.slug === params.slug); */
+
+  const locale = params.lang;
 
   const getPostData = async () => {
     try {
@@ -80,7 +83,7 @@ const Page = async ({
       {/* Container */}
       <div className="space-y-10">
         {/* Post Hero */}
-        <PostHero post={post} />
+        <PostHero locale={locale} post={post} />
         {/* Post Body and Social Share */}
         <div className="flex flex-col gap-10 md:flex-row">
           <div className="relative">
@@ -107,7 +110,7 @@ const Page = async ({
         </div>
         {/* CTA Card */}
         {/* @ts-expect-error Async Server Component */}
-        <CTACard />
+        <CTACard locale={locale} />
       </div>
     </PaddingContainer>
   );
