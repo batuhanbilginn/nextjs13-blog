@@ -5,7 +5,14 @@ import PostList from "@/components/post/post-lists";
 import directus from "@/lib/directus";
 import { notFound } from "next/navigation";
 
-export default async function Home() {
+export default async function Home({
+  params,
+}: {
+  params: {
+    lang: string;
+  };
+}) {
+  console.log(params);
   const getAllPosts = async () => {
     try {
       const posts = await directus.items("post").readByQuery({
