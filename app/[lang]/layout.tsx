@@ -28,6 +28,21 @@ export const generateMetadata = async ({
       default: siteConfig.siteName,
     },
     description: dicitionary.footer.description,
+    openGraph: {
+      title: siteConfig.siteName,
+      description: dicitionary.footer.description,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}`,
+      siteName: siteConfig.siteName,
+      images: [
+        {
+          url: "https://localhost:3000/opengraph-image.png",
+          width: 1200,
+          height: 628,
+        },
+      ],
+      locale: lang,
+      type: "website",
+    },
   };
 };
 

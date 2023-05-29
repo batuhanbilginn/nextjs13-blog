@@ -67,6 +67,21 @@ export const generateMetadata = async ({
   return {
     title: post?.title,
     description: post?.description,
+    openGraph: {
+      title: post?.title,
+      description: post?.description,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/${slug}`,
+      siteName: post?.title,
+      images: [
+        {
+          url: "https://localhost:3000/opengraph-image.png",
+          width: 1200,
+          height: 628,
+        },
+      ],
+      locale: lang,
+      type: "website",
+    },
   };
 };
 
@@ -126,6 +141,7 @@ const Page = async ({
 
   const post = await getPostData(postSlug, locale);
 
+  // If there is no post found, return 404
   if (!post) {
     notFound();
   }
