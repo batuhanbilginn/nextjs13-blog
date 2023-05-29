@@ -3,12 +3,13 @@ import SocialLink from "@/components/elements/social-link";
 import PaddingContainer from "@/components/layout/padding-container";
 import PostBody from "@/components/post/post-body";
 import PostHero from "@/components/post/post-hero";
+import siteConfig from "@/config/site";
 import directus from "@/lib/directus";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 
 // Get Post Data
-const getPostData = cache(async (postSlug: string, locale: string) => {
+export const getPostData = cache(async (postSlug: string, locale: string) => {
   try {
     const post = await directus.items("post").readByQuery({
       filter: {
@@ -72,13 +73,13 @@ export const generateMetadata = async ({
       description: post?.description,
       url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/post/${slug}`,
       siteName: post?.title,
-      images: [
+      /* images: [
         {
-          url: "https://localhost:3000/opengraph-image.png",
+          url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/post/${slug}/opengraph-image.png`,
           width: 1200,
           height: 628,
         },
-      ],
+      ], */
       locale: lang,
       type: "website",
     },
@@ -148,6 +149,23 @@ const Page = async ({
 
   const post = await getPostData(postSlug, locale);
 
+  /* Structured Data for Google */
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    image: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/post/${postSlug}/opengraph-image.png`,
+    author: post.author.first_name + " " + post.author.last_name,
+    genre: post.category.title,
+    publisher: siteConfig.siteName,
+    url: `${process.env.NEXT_PUBLIC_SITE_URL}/post/${postSlug}`,
+    datePublished: new Date(post.date_created).toISOString(),
+    dateCreated: new Date(post.date_created).toISOString(),
+    dateModified: new Date(post.date_updated).toISOString(),
+    description: post.description,
+    articleBody: post.body,
+  };
+
   // If there is no post found, return 404
   if (!post) {
     notFound();
@@ -155,6 +173,11 @@ const Page = async ({
 
   return (
     <PaddingContainer>
+      {/* Add JSON-LD to your page */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Container */}
       <div className="space-y-10">
         {/* Post Hero */}
