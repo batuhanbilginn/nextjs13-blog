@@ -1,11 +1,13 @@
 import Footer from "@/components/navigation/footer";
 import Navigation from "@/components/navigation/navigation";
+import siteConfig from "@/config/site";
 import { getDictionary } from "@/lib/getDictionary";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
+/* STATIC METADATA */
 /* export const metadata: Metadata = {
   title: "Explorer",
   description:
@@ -21,7 +23,10 @@ export const generateMetadata = async ({
   const dicitionary = await getDictionary(lang);
 
   return {
-    title: "Explorer",
+    title: {
+      template: "%s | " + siteConfig.siteName,
+      default: siteConfig.siteName,
+    },
     description: dicitionary.footer.description,
   };
 };
