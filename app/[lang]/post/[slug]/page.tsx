@@ -5,6 +5,7 @@ import PostBody from "@/components/post/post-body";
 import PostHero from "@/components/post/post-hero";
 import siteConfig from "@/config/site";
 import directus from "@/lib/directus";
+import { getDictionary } from "@/lib/getDictionary";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 
@@ -171,6 +172,8 @@ const Page = async ({
     notFound();
   }
 
+  const dictionary = await getDictionary(locale);
+
   return (
     <PaddingContainer>
       {/* Add JSON-LD to your page */}
@@ -207,8 +210,8 @@ const Page = async ({
           <PostBody body={post.body} />
         </div>
         {/* CTA Card */}
-        {/* @ts-expect-error Async Server Component */}
-        <CTACard locale={locale} />
+        {/* ---@ts-expect-error Async Server Component */}
+        <CTACard dictionary={dictionary} />
       </div>
     </PaddingContainer>
   );

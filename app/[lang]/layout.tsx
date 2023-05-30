@@ -51,6 +51,10 @@ export const generateMetadata = async ({
         "de-DE": `${process.env.NEXT_PUBLIC_SITE_URL}/de`,
       },
     },
+    /* Verification for Google Search Console */
+    vericifaction: {
+      google: "phZgjAmXFUPB7WEa-ETZ3HfDj9tAifMO1VRJd7ybIQo",
+    },
   };
 };
 

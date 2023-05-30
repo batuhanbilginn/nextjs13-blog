@@ -3,6 +3,7 @@ import PaddingContainer from "@/components/layout/padding-container";
 import PostCard from "@/components/post/post-card";
 import PostList from "@/components/post/post-lists";
 import directus from "@/lib/directus";
+import { getDictionary } from "@/lib/getDictionary";
 import { notFound } from "next/navigation";
 
 export default async function Home({
@@ -60,6 +61,8 @@ export default async function Home({
     notFound();
   }
 
+  const dictionary = await getDictionary(locale);
+
   return (
     <PaddingContainer>
       <main className="space-y-10">
@@ -68,8 +71,8 @@ export default async function Home({
           locale={locale}
           posts={posts.filter((_post, index) => index > 0 && index < 3)}
         />
-        {/* @ts-expect-error Async Server Component */}
-        <CTACard locale={locale} />
+        {/* ---@ts-expect-error Async Server Component */}
+        <CTACard dictionary={dictionary} />
         <PostCard locale={locale} reverse post={posts[3]} />
         <PostList
           locale={locale}
