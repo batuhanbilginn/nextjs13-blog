@@ -99,7 +99,7 @@ export const generateMetadata = async ({
 };
 
 export const generateStaticParams = async () => {
-  // This for DUMMY DATA
+  // This for DUMMY DATA Approach
   /* return DUMMY_CATEGORIES.map((category) => {
     return {
       category: category.slug,
