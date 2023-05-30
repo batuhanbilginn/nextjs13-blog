@@ -12,9 +12,9 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
+  /*  experimental: {
     serverActions: true,
-  },
+  }, */
 };
 
 module.exports = nextConfig;

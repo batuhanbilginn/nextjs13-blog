@@ -7,7 +7,7 @@ import Image from "next/image";
 const CTACard = async ({ locale }: { locale: string }) => {
   const dictionary = await getDictionary(locale);
 
-  const formAction = async (formData: FormData) => {
+  /* const formAction = async (formData: FormData) => {
     "use server";
     try {
       const email = formData.get("email");
@@ -18,7 +18,7 @@ const CTACard = async ({ locale }: { locale: string }) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }; */
 
   const subscribersCount = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}items/subscribers?meta=total_count&access_token=${process.env.ADMIN_TOKEN}`,
@@ -55,7 +55,7 @@ const CTACard = async ({ locale }: { locale: string }) => {
         {/* Form */}
         <form
           key={subscribersCount + "subscribers-form"}
-          action={formAction}
+          /* action={formAction} */
           className="flex items-center w-full gap-2 mt-6"
         >
           <input
