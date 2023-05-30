@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
   console.log(`/en/post/${slug}`);
   // Revalidate the Post in Every Language
   /* revalidatePath(`/en`); */
-  revalidatePath(`/en/post/${slug}`);
+  revalidatePath(`${process.env.NEXT_PUBLIC_SITE_URL}/en/post/${slug}`);
 
   return NextResponse.json({ revalidated: true, now: Date.now() });
 }
