@@ -61,6 +61,7 @@ export default async function Home({
     notFound();
   }
 
+  /* Get Dictionary */
   const dictionary = await getDictionary(locale);
 
   return (
