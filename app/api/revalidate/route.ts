@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
   const slug = request.nextUrl.searchParams.get("slug");
   const categorySlug = request.nextUrl.searchParams.get("category-slug");
+  console.log({ slug, categorySlug });
   // Revalidate the Post
   revalidatePath(`/en/post/${slug}`);
   revalidatePath(`/de/post/${slug}`);
