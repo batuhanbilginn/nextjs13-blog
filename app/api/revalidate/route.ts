@@ -2,16 +2,16 @@ import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
-  const slug = request.nextUrl.searchParams.get("slug");
-  const categorySlug = request.nextUrl.searchParams.get("category-slug");
-  // Revalidate the Post in Every Language
+  const token = request.nextUrl.searchParams.get("token");
+  // If there is no token, return a 401
+  if (!token || token !== process.env.ADMIN_TOKEN)
+    return NextResponse.json({ error: "Not authorised" }, { status: 401 });
+  // Revalidate All Posts
   revalidatePath(`/[lang]/post/[slug]`);
-  revalidatePath(`/[lang]/post/[slug]`);
-  // Revalidate the Category
+  // Revalidate All Categories
   revalidatePath(`/[lang]/[category]`);
-  revalidatePath(`/[lang]/[category]`);
-  // Revalidate Home
+  // Revalidate All Languages
   revalidatePath(`/[lang]`);
-  revalidatePath(`/[lang]`);
+
   return NextResponse.json({ revalidated: true, now: Date.now() });
 }
