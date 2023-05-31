@@ -1,13 +1,7 @@
-import { revalidatePath } from "next/cache";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
-export async function GET(request: NextRequest) {
-  const slug = request.nextUrl.searchParams.get("slug");
-  const categorySlug = request.nextUrl.searchParams.get("category-slug");
-  console.log(`/en/post/${slug}`);
-  // Revalidate the Post in Every Language
-  /* revalidatePath(`/en`); */
-  revalidatePath(`${process.env.NEXT_PUBLIC_SITE_URL}/en/post/${slug}`);
+export async function GET(request: NextRequest, res: any) {
+  const path = request.nextUrl.searchParams.get("path");
 
-  return NextResponse.json({ revalidated: true, now: Date.now() });
+  return await res.revalidate(`${path}`);
 }
