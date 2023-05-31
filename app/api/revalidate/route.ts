@@ -5,13 +5,13 @@ export async function GET(request: NextRequest) {
   const slug = request.nextUrl.searchParams.get("slug");
   const categorySlug = request.nextUrl.searchParams.get("category-slug");
   // Revalidate the Post in Every Language
-  revalidatePath(`/en/post/[slug]`);
-  revalidatePath(`/de/post/[slug]`);
+  revalidatePath(`/[lang]/post/[slug]`);
+  revalidatePath(`/[lang]/post/[slug]`);
   // Revalidate the Category
-  revalidatePath(`/en/[category]`);
-  revalidatePath(`/de/[category]`);
+  revalidatePath(`/[lang]/[category]`);
+  revalidatePath(`/[lang]/[category]`);
   // Revalidate Home
-  revalidatePath(`/en`);
-  revalidatePath(`/de`);
+  revalidatePath(`/[lang]`);
+  revalidatePath(`/[lang]`);
   return NextResponse.json({ revalidated: true, now: Date.now() });
 }
